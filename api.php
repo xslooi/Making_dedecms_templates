@@ -58,6 +58,7 @@ if(empty($source_code) && 0 !== stripos($tag_name, 'cmd_')){
 if(empty($tag_name)){
     $response_array = array(
         'state' => -1,
+        'msg' => '标签名或者操作名不能为空！',
         'data' => '',
     );
     exit(json_encode($response_array));

@@ -99,6 +99,41 @@ $(function () {
                     customCopy(data.data);
                 }else if(data.state == 0){
                     ShowMsg(data.msg, 'success');
+                }else if(data.state == 2){
+
+                    var items = data.data, analysys_nav_html = '';
+
+                    if(items.length > 0){
+                        analysys_nav_html += '<table border="1" width="100%">\n' +
+                            '    <tbody>\n' +
+                            '        <tr class="firstRow">\n' +
+                            '            <th width="60%">栏目名称</th>\n' +
+                            '            <th>一键复制按钮</th>\n' +
+                            '        </tr>\n';
+
+                        for(var i=0, len=items.length; i<len; i++){
+                            analysys_nav_html +=
+                                '        <tr>\n' +
+                                '            <td>' + items[i] + '</td>\n' +
+                                '            <td><button class="fixed" data-clipboard-text="' + items[i] + '" type="button">' + items[i] + '</button></td>\n' +
+                                '        </tr>\n';
+                        }
+
+                        analysys_nav_html += '    </tbody>\n' +
+                            '</table>';
+                    }else{
+                         analysys_nav_html = '<h1 style="color: red;text-align: center;">没有找到栏目名称，请检查源代码输入正确？</h1>';
+                    }
+
+                    //页面层
+                    layer.open({
+                        type: 1,
+                        shade: 0.5,
+                        title: '导航栏目中文解析完成',
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['800px', '500px'], //宽高
+                        content: analysys_nav_html
+                    });
                 }
                 else{
                     ShowMsg(data.msg);

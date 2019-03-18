@@ -58,7 +58,6 @@ if(empty($source_code) && 0 !== stripos($tag_name, 'cmd_')){
 if(empty($tag_name)){
     $response_array = array(
         'state' => -1,
-        'msg' => '标签名不能为空！',
         'data' => '',
     );
     exit(json_encode($response_array));
@@ -68,6 +67,9 @@ if(empty($tag_name)){
 //基本路由：
 if(0 === stripos($tag_name, 'cmd_')){
     execute_cmd($tag_name);
+}
+elseif(0 === stripos($tag_name, 'analysis_')){
+    execute_analysis($tag_name, $source_code);
 }
 elseif('pc' == $platform){
     format_pc($tag_name, $source_code);
@@ -87,6 +89,67 @@ else{
 //======================================================================================================================
 //函数库区
 //======================================================================================================================
+
+/**
+ * 分析导航中的中文名称列表目前仅实现提取a标签中 <a>栏目名称</a> 标签中的栏目名称
+ * todo 此处想分出一二级分类？暂时没有想到办法
+ * @param $analysis
+ * @param $source_code
+ */
+function execute_analysis($analysis, $source_code){
+    //初始化变量
+    $result = array();
+
+    if('analysis_nav' == $analysis){
+        $html_code = $source_code;
+
+        //源码整理格式化
+        $html_code = strip_tags($html_code, '<a>');
+
+        //a标签内容正则获取
+        $matches = array();
+        $pattern = '/<a .*?>(.*?)<\/a>/i';
+        preg_match_all($pattern, $html_code, $matches);
+        if(isset($matches[1][0])){
+            foreach($matches[1] as $item){
+                if(!empty($item)){
+                    $result[] = trim($item);
+                }
+            }
+        }
+
+        //a 标签去除解析失败后，直接匹配源码中的中文
+        if(empty($result)){
+            $html_code = $source_code;
+            //正则直接匹配中文列表
+            $matches = array();
+            $pattern = '/[\sa-zA-z0-9]*[\x{4e00}-\x{9fa5}]+[\sa-zA-z0-9]*/u';
+            preg_match_all($pattern, $html_code, $matches);
+            if(isset($matches[0][0])){
+                foreach($matches[0] as $item){
+                    if(!empty($item)){
+                        $result[] = trim($item);
+                    }
+                }
+            }
+
+            $result = array_unique($result);
+        }
+
+        $msg = '栏目名称解析完成';
+    }else{
+        $msg = $analysis . '解析完成';
+    }
+
+
+    $response_array = array(
+        'state' => 2,
+        'msg' => $msg,
+        'data' => $result,
+    );
+
+    exit(json_encode($response_array));
+}
 
 /**
  * 执行本地服务器命令
@@ -979,7 +1042,7 @@ function code_convert(&$html_body){
     }
 
     //去除错误字符
-    $html_body = str_replace('�', '', $html_body);
+    $html_body = str_replace('�', '?', $html_body);
 
 }
 

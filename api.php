@@ -100,6 +100,7 @@ else{
 function execute_analysis($analysis, $source_code){
     //初始化变量
     $result = array();
+    $state = 2;
 
     if('analysis_nav' == $analysis){
         $html_code = $source_code;
@@ -136,15 +137,55 @@ function execute_analysis($analysis, $source_code){
 
             $result = array_unique($result);
         }
-
+        $state = 2;
         $msg = '栏目名称解析完成';
-    }else{
+    }
+    elseif('analysis_navtree' == $analysis){
+
+        $html = $source_code;
+        // 格式化源代码
+        $html = str_replace(array("\r", "\n", "\t", "&nbsp;"), '', $html);  //去掉换行
+        $html = preg_replace('/<script[\s|>][\s\S]*?<\/script>/i', '', $html); //去掉js
+        $html = preg_replace('/<style[\s|>][\s\S]*?<\/style>/i', '', $html); //去掉css
+        $html = preg_replace('/<!--[\s\S]*?-->/', '', $html); //去掉HTML注释
+        $html = preg_replace('/ {2,}/', ' ', $html); //多个空格替换为一个
+        $html = str_replace("> <", '><', $html);  //去掉两个标签中间的空格
+        $html = trim($html); // 去掉两边的空白
+
+        $pattern_html_tags = '/<[a-zA-Z]+[\s|>]{1}/i'; //匹配所有标签 (用\s包括回车)
+        $matches_html_tags = array();
+        preg_match_all($pattern_html_tags, $html, $matches_html_tags);
+
+        $htmlTags = array();
+        if(isset($matches_html_tags[0][0])) {
+            foreach ($matches_html_tags[0] as $item) {
+                $htmlTag = str_replace(array('<', '>', ' '), '', $item);
+                $htmlTags[] = $htmlTag;
+            }
+        }
+
+        $uniqueHtmlTags = array_unique($htmlTags);
+        if(isset($uniqueHtmlTags[0])){
+            foreach($uniqueHtmlTags as $item){
+                $html = preg_replace('/<' . $item . '.*?>/', '<' . $item . '>', $html);
+            }
+        }
+
+        $pattern_replace = '/>([\sa-zA-z0-9]*[\x{4e00}-\x{9fa5}\P{L}]+[\sa-zA-z0-9]*)</u'; //替换中文内容的正则
+        $html = preg_replace($pattern_replace, '><button class="fixed" data-clipboard-text="${1}" type="button"> ${1} </button><', $html);
+
+        $result = $html;
+
+        $state = 3;
+        $msg = '栏目名称解析完成';
+    }
+    else{
         $msg = $analysis . '解析完成';
     }
-
-
+    
+    
     $response_array = array(
-        'state' => 2,
+        'state' => $state,
         'msg' => $msg,
         'data' => $result,
     );

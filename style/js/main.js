@@ -135,12 +135,32 @@ $(function () {
                         content: analysys_nav_html
                     });
                 }
+                else if(data.state == 3)
+                {
+
+                    var analysys_nav_html = data.data;
+                    if('' == analysys_nav_html){
+                        ShowMsg('分析结果为空！'); return;
+                    }
+
+                    //页面层
+                    layer.open({
+                        type: 1,
+                        shade: 0.5,
+                        title: '导航栏目中文解析完成',
+                        skin: 'layui-layer-rim', //加上边框
+                        area: ['800px', '500px'], //宽高
+                        content: analysys_nav_html
+                    });
+                }
                 else{
                     ShowMsg(data.msg);
                 }
             },
-            error: function (xhr) {
-
+            error: function (xhr, msg) {
+                console.log(xhr);
+                console.log(msg);
+                ShowMsg('请检查PHP环境，必须大于5.3.0！或其他错误输出？');
             }
         });
 

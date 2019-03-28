@@ -45,6 +45,15 @@ $response_array = array(
     'data' => 'formatCodeOk',
 );
 
+//PHP 版本检测
+if(version_compare(PHP_VERSION,'5.6.0','<')){
+    $response_array = array(
+        'state' => -1,
+        'msg' => 'PHP 版本必须大于 5.3.0 !',
+        'data' => '',
+    );
+    exit(json_encode($response_array));
+}
 
 if(empty($source_code) && 0 !== stripos($tag_name, 'cmd_')){
     $response_array = array(
@@ -1039,7 +1048,10 @@ function removeFileBOM($filename) {
  * @param string $path_pattern
  * @return array|false
  */
-function get_file_list($path_pattern=INPUT_DIR . '*.html'){
+function get_file_list($path_pattern=''){
+    if(empty($path_pattern)){
+        $path_pattern = INPUT_DIR . '*.html';
+    }
     return glob($path_pattern);
 }
 

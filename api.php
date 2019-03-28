@@ -46,7 +46,7 @@ $response_array = array(
 );
 
 //PHP 版本检测
-if(version_compare(PHP_VERSION,'5.6.0','<')){
+if(version_compare(PHP_VERSION,'5.3.0','<')){
     $response_array = array(
         'state' => -1,
         'msg' => 'PHP 版本必须大于 5.3.0 !',

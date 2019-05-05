@@ -161,7 +161,7 @@ function execute_analysis($analysis, $source_code){
         $html = str_replace("> <", '><', $html);  //去掉两个标签中间的空格
         $html = trim($html); // 去掉两边的空白
 
-        $pattern_html_tags = '/<[a-zA-Z]+[\s|>]{1}/i'; //匹配所有标签 (用\s包括回车)
+        $pattern_html_tags = '/<[a-zA-Z1-6]+[\s|>]{1}/i'; //匹配所有标签 (用\s包括回车)
         $matches_html_tags = array();
         preg_match_all($pattern_html_tags, $html, $matches_html_tags);
 

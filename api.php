@@ -960,7 +960,7 @@ function dede_replace(){
 }
 
 /**
- * 替换dedecms头部标签
+ * 替换HTML内容中 QQ TEL Email 等
  * @return bool
  */
 function replace_telqq(){
@@ -1116,12 +1116,14 @@ function multi_replace(&$html_body){
     $html_body = preg_replace("/<meta[\s]+name=\"description\"[\s]+content=\".*/i", "<meta name=\"description\" content=\"{dede:global.cfg_description/}\" />", $html_body);
     $html_body = preg_replace("/<meta[\s]+name=\"author\"[\s]+content=\".*/i", "<meta name=\"author\" content=\"xslooi\"/>", $html_body);
     $html_body = preg_replace("/<meta[\s]+name=\"copyright\"[\s]+content=\".*/i", "<meta name=\"copyright\" content=\"xslooi\"/>", $html_body);
+    $html_body = preg_replace("/<meta[\s]+name=\"generator\"[\s]+content=\".*/i", "<meta name=\"generator\" content=\"xslooi\"/>", $html_body);
 
     //内容在前标签
     $html_body = preg_replace("/<meta[\s]+content=\".*[\s]+name=\"keywords.*/i", "<meta name=\"keywords\" content=\"{dede:global.cfg_keywords/}\" />", $html_body);
     $html_body = preg_replace("/<meta[\s]+content=\".*[\s]+name=\"description.*/i", "<meta name=\"description\" content=\"{dede:global.cfg_description/}\" />", $html_body);
     $html_body = preg_replace("/<meta[\s]+content=\".*[\s]+name=\"author.*/i", "<meta name=\"author\" content=\"xslooi\"/>", $html_body);
     $html_body = preg_replace("/<meta[\s]+content=\".*[\s]+name=\"copyright.*/i", "<meta name=\"copyright\" content=\"xslooi\"/>", $html_body);
+    $html_body = preg_replace("/<meta[\s]+content=\".*[\s]+name=\"generator.*/i", "<meta name=\"generator\" content=\"xslooi\"/>", $html_body);
 
 }
 

@@ -21,3 +21,37 @@
     height: 1px;
     overflow: hidden;
 }
+
+/*手机版本适配*/
+/* 设置了浏览器宽度不大于1200px时 abc 显示900px宽度 */
+
+@media screen and (max-width: 1200px) {
+    #sourcebox {
+        height: 3rem;
+    }
+
+    #msgBoxContainer{
+        font-size: 2rem;
+    }
+
+    .controllerRow label {
+        font-size: 1.5rem;
+        color: brown;
+    }
+
+    .controllerRow button {
+        font-size: 2rem;
+        padding: .3rem .6rem;
+        margin: 0.2rem;
+    }
+
+    #NavBox, .layui-layer-content {
+        font-size: 2rem;
+    }
+
+    #NavBox button, .layui-layer-content button {
+        font-size: 2rem;
+        margin: .6rem 2rem;
+    }
+
+}

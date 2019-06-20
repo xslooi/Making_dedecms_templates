@@ -16,6 +16,16 @@
     padding: 5px;
 }
 
+.controllerRow label {
+    color: brown;
+}
+
+.selected{
+    color: #fff !important;
+    background: green;
+    padding: 5px;
+}
+
 .hidden_div{
     opacity: 0;
     height: 1px;

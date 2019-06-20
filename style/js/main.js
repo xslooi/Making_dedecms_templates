@@ -61,9 +61,27 @@ function customCopy(returnData){
 // 页面开始执行
 $(function () {
 
+    //此处判断手机代码 变量
+    var isMobile = !!(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent));
+
     //清空输入
     $("#sourcebox").val('');
     $("#sourcebox").focus();
+
+    //处理版本选择radio
+    $("input[name=platform]").click(function(){
+
+        var p_val = $(this).val();
+
+        if('pc' == p_val){
+            $("label[for=platform_wap]").removeClass('selected');
+            $("label[for=platform_pc]").addClass('selected');
+        }
+        else{
+            $("label[for=platform_pc]").removeClass('selected');
+            $("label[for=platform_wap]").addClass('selected');
+        }
+    });
 
     //监听所有button的点击事件
     $("button").click(function () {
@@ -104,7 +122,7 @@ $(function () {
                     var items = data.data, analysys_nav_html = '';
 
                     if(items.length > 0){
-                        analysys_nav_html += '<table border="1" width="100%">\n' +
+                        analysys_nav_html += '<table id="NavBox" border="1" width="100%">\n' +
                             '    <tbody>\n' +
                             '        <tr class="firstRow">\n' +
                             '            <th width="60%">栏目名称</th>\n' +
@@ -125,15 +143,29 @@ $(function () {
                          analysys_nav_html = '<h1 style="color: red;text-align: center;">没有找到栏目名称，请检查源代码输入正确？</h1>';
                     }
 
-                    //页面层
-                    layer.open({
-                        type: 1,
-                        shade: 0.5,
-                        title: '导航栏目中文解析完成',
-                        skin: 'layui-layer-rim', //加上边框
-                        area: ['800px', '500px'], //宽高
-                        content: analysys_nav_html
-                    });
+                    if(isMobile){
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            shade: 0.5,
+                            title: '导航栏目中文解析完成',
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['100%', 'auto'], //宽高
+                            content: analysys_nav_html
+                        });
+                    }
+                    else{
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            shade: 0.5,
+                            title: '导航栏目中文解析完成',
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['800px', '500px'], //宽高
+                            content: analysys_nav_html
+                        });
+                    }
+
                 }
                 else if(data.state == 3)
                 {
@@ -143,15 +175,28 @@ $(function () {
                         ShowMsg('分析结果为空！'); return;
                     }
 
-                    //页面层
-                    layer.open({
-                        type: 1,
-                        shade: 0.5,
-                        title: '导航栏目中文解析完成',
-                        skin: 'layui-layer-rim', //加上边框
-                        area: ['800px', '500px'], //宽高
-                        content: analysys_nav_html
-                    });
+                    if(isMobile){
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            shade: 0.5,
+                            title: '导航栏目中文解析完成',
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['100%', 'auto'], //宽高
+                            content: analysys_nav_html
+                        });
+                    }
+                    else{
+                        //页面层
+                        layer.open({
+                            type: 1,
+                            shade: 0.5,
+                            title: '导航栏目中文解析完成',
+                            skin: 'layui-layer-rim', //加上边框
+                            area: ['800px', '500px'], //宽高
+                            content: analysys_nav_html
+                        });
+                    }
                 }
                 else{
                     ShowMsg(data.msg);

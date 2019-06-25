@@ -179,16 +179,19 @@
     <textarea id="fixed_html_nav_arcid">{dede:field name='aid' runphp='yes'}@me = @me=='4'?" class='on'":'';{/dede:field}</textarea>
     <textarea id="fixed_html_search_keyword">搜索<strong style="color:red;">{dede:global name='keyword' function='RemoveXSS(@me)'/}</strong>结果页：</textarea>
     <textarea id="fixed_html_page_css">
-        /*页码样式*/
-        #Paging {text-align:center;font-size:100%}
-        .Pagination {display:inline-block;}
-        .Pagination .pageinfo {border:1px solid #dedede;color:#333;margin-left:1rem;}
-        .Pagination span {background:#f6f6f6 none repeat scroll 0 0;display:block;float:left;text-align:center;padding:0.3rem 0.8rem;}
-        .Pagination a {background:#f6f6f6 none repeat scroll 0 0;border:1px solid #dfdfdf;color:#555;display:block;float:left;text-align:center;text-decoration:none;padding:0.3rem 0.8rem;}
-        .Pagination a:hover {color:#fff;background:#2fd0b5 none repeat scroll 0 0;}
-        .Pagination span.current {border:1px solid #2fd0b5;background:#2fd0b5 none repeat scroll 0 0;color:White;position:relative;}
-        .Pagination span.disabled {border:1px solid #dfdfdf;color:#aaa;cursor:not-allowed;}
-        @media screen and (max-width:480px) {.Pagination .pageinfo {display:none;}}
+     /*页码样式*/
+    #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:100%;text-align:center;}
+    .Pagination {display:inline-block;}
+    .Pagination .pageinfo {border:1px solid #dedede;color:#333;margin-left:1rem;}
+    .Pagination .pagejump {border:1px solid #dedede;color:#333;margin-left:1rem;}
+    .Pagination .pagejump input {width: 2rem;margin: -2px 2px;padding: 0;}
+    .Pagination .pageselect {min-width: 3rem;padding: 0.358rem;border: 1px solid #ccc;}
+    .Pagination span {background:#f6f6f6 none repeat scroll 0 0;display:block;float:left;text-align:center;padding:0.3rem 0.8rem;}
+    .Pagination a {background:#f6f6f6 none repeat scroll 0 0;border:1px solid #dfdfdf;color:#555;display:block;float:left;text-align:center;text-decoration:none;padding:0.3rem 0.8rem;}
+    .Pagination a:hover {color:#fff;background:#2fd0b5 none repeat scroll 0 0;}
+    .Pagination span.current {border:1px solid #2fd0b5;background:#2fd0b5 none repeat scroll 0 0;color:White;position:relative;}
+    .Pagination span.disabled {border:1px solid #dfdfdf;color:#aaa;cursor:not-allowed;}
+    @media screen and (max-width:480px) {.Pagination .pageinfo {display:none;}}
     </textarea>
 </div>
 </body>

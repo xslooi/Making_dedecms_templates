@@ -408,7 +408,12 @@ function format_pc($tag_name, $source_code){
                 'a' => array(
                     'attrs' => 'href|title|target',
                     'replace' => ' href="[field:url/]" title="[field:webname/]"',
-                )
+                ),
+                'img' =>
+                    array(
+                        'attrs' => 'src|alt|title',
+                        'replace' => ' src="[field:logo /]" alt="[field:webname/]" title="[field:webname/]"',
+                    ),
             ),
         ),
 
@@ -599,7 +604,12 @@ function format_wap($tag_name, $source_code){
                 'a' => array(
                     'attrs' => 'href|title|target',
                     'replace' => ' href="[field:url/]" title="[field:webname/]"',
-                )
+                ),
+                'img' =>
+                    array(
+                        'attrs' => 'src|alt|title',
+                        'replace' => ' src="[field:logo /]" alt="[field:webname/]" title="[field:webname/]"',
+                    ),
             ),
         ),
 

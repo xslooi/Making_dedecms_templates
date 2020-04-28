@@ -347,7 +347,7 @@ function deldir($path){
 function format_pc($tag_name, $source_code){
     $pc_tags = array(
         'arclist' => array(
-            'tag_start' => "{dede:arclist  flag='c,p' typeid='15' row='8' col='' titlelen='60' infolen='' imgwidth='' imgheight='' listtype='' orderby='' orderway=''  keyword=''}",
+            'tag_start' => "{dede:arclist flag='c,p' typeid='15' row='8' col='' titlelen='60' infolen='' imgwidth='' imgheight='' listtype='' isweight='y' orderby='weight' orderway='' keyword=''}",
             'tag_end' => "{/dede:arclist}",
             'inner_time' => "[field:pubdate function=\"MyDate('Y-m-d',@me)\" /]",
             'inner_title' => '[field:title /]',
@@ -367,7 +367,7 @@ function format_pc($tag_name, $source_code){
         ),
 
         'channel' => array(
-            'tag_start' => "{dede:channel type='son' row='20' currentstyle=\"<li><a href='~typelink~' class='thisclass'>~typename~</a></li>\"}",
+            'tag_start' => "{dede:channel type='son' row='20' currentstyle=\"<li class='thisclass'><a href='~typelink~'>~typename~</a></li>\"}",
             'tag_end' => "{/dede:channel}",
             'inner_title' => '[field:typename/]',
             'inner_text' => '[field:typename/]',
@@ -418,7 +418,7 @@ function format_pc($tag_name, $source_code){
         ),
 
         'list' => array(
-            'tag_start' => "{dede:list pagesize='12'  titlelen='60' infolen='200'}",
+            'tag_start' => "{dede:list pagesize='12'  titlelen='60' infolen='200' orderby='weight'}",
             'tag_end' => "{/dede:list}",
             'inner_time' => "[field:pubdate function=\"MyDate('Y-m-d',@me)\" /]",
             'inner_title' => '[field:title /]',
@@ -548,7 +548,7 @@ function format_pc($tag_name, $source_code){
 function format_wap($tag_name, $source_code){
     $wap_tags = array(
         'arclist' => array(
-            'tag_start' => "{dede:arclist  flag='c,p' typeid='15' row='8' col='' titlelen='60' infolen='' imgwidth='' imgheight='' listtype='' orderby='' orderway=''  keyword=''}",
+            'tag_start' => "{dede:arclist flag='c,p' typeid='15' row='8' col='' titlelen='60' infolen='' imgwidth='' imgheight='' listtype='' isweight='y' orderby='weight' orderway='' keyword=''}",
             'tag_end' => "{/dede:arclist}",
             'inner_time' => "[field:pubdate function=\"MyDate('Y-m-d',@me)\" /]",
             'inner_title' => '[field:title /]',
@@ -568,7 +568,7 @@ function format_wap($tag_name, $source_code){
         ),
 
         'channel' => array(
-            'tag_start' => "{dede:channel type='son' row='20' currentstyle=\"<li><a href='/m/list.php?tid=~id~' class='thisclass'>~typename~</a></li>\"}",
+            'tag_start' => "{dede:channel type='son' row='20' currentstyle=\"<li class='thisclass'><a href='/m/list.php?tid=~id~'>~typename~</a></li>\"}",
             'tag_end' => "{/dede:channel}",
             'inner_title' => '[field:typename/]',
             'inner_text' => '[field:typename/]',
@@ -614,7 +614,7 @@ function format_wap($tag_name, $source_code){
         ),
 
         'list' => array(
-            'tag_start' => "{dede:list pagesize='12'  titlelen='60' infolen='200'}",
+            'tag_start' => "{dede:list pagesize='12'  titlelen='60' infolen='200' orderby='weight'}",
             'tag_end' => "{/dede:list}",
             'inner_time' => "[field:pubdate function=\"MyDate('Y-m-d',@me)\" /]",
             'inner_title' => '[field:title /]',

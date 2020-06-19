@@ -1144,6 +1144,10 @@ function dede_replace_perfect(){
                     // 替换head 标签后边，注意里边可能有属性
                     preg_match("/<head.*?>/i", $html_body, $matches);
 
+                    if(!isset($matches[0])){
+                       continue;
+                    }
+
                     $head_meta = $matches[0] . "\r\n";
                     if('html4' == $html_type){
                         $head_meta .= '<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />' . "\r\n";

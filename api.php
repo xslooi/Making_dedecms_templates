@@ -180,6 +180,8 @@ function execute_analysis($analysis, $source_code){
             }
         }
 
+        $html = preg_replace('/\s/', '', $html);
+
         $pattern_replace = '/>([\sa-zA-z0-9]*[\x{4e00}-\x{9fa5}\P{L}]+[\sa-zA-z0-9]*)</u'; //替换中文内容的正则
         $html = preg_replace($pattern_replace, '><button class="fixed" data-clipboard-text="${1}" type="button"> ${1} </button><', $html);
 

@@ -1027,10 +1027,10 @@ function dede_replace(){
                     $file_name = basename(iconv('GB2312', 'UTF-8//IGNORE', $temp_path));
 
                     if('index.html' == $file_name){
-                        $html_body = str_replace('<title>{dede:field.typename /}_{dede:global.cfg_webname/}</title>', '<title>{dede:global.cfg_webname/}</title>', $html_body);
+                        $html_body = str_replace('<title>{dede:field.typename /}-{dede:global.cfg_webname/}</title>', '<title>{dede:global.cfg_webname/}</title>', $html_body);
                     }
                     elseif(preg_match('/详情/', $file_name)){
-                        $html_body = str_replace('<title>{dede:field.typename /}_{dede:global.cfg_webname/}</title>', '<title>{dede:field.title /}_{dede:global.cfg_webname/}</title>', $html_body);
+                        $html_body = str_replace('<title>{dede:field.typename /}-{dede:global.cfg_webname/}</title>', '<title>{dede:field.title /}_{dede:global.cfg_webname/}</title>', $html_body);
                     }
                     //endregion
 
@@ -1663,7 +1663,7 @@ function code_convert(&$html_body){
  */
 function multi_replace(&$html_body){
     //此处正则替换多数标签
-    $html_body = preg_replace("/<title>.*?<\/title>/i", "<title>{dede:field.typename /}_{dede:global.cfg_webname/}</title>", $html_body);
+    $html_body = preg_replace("/<title>.*?<\/title>/i", "<title>{dede:field.typename /}-{dede:global.cfg_webname/}</title>", $html_body);
 
     $html_body = preg_replace("/<meta[\s]+name=\"keywords\"[\s]+content=\".*/i", "<meta name=\"keywords\" content=\"{dede:global.cfg_keywords/}\" />", $html_body);
     $html_body = preg_replace("/<meta[\s]+name=\"description\"[\s]+content=\".*/i", "<meta name=\"description\" content=\"{dede:global.cfg_description/}\" />", $html_body);

@@ -75,7 +75,7 @@
              <button class="fixed_html" value="jump_wap" type="button"> 跳转手机JS </button>
             <button class="fixed" data-clipboard-text="[field:global.autoindex/]" type="button"> 递增autoindex </button>
             <button class="fixed" data-clipboard-text="[field:global.autoindex  runphp='yes']if(1==@me) @me='HTML';else @me='';[/field:global.autoindex]" type="button"> 递增第一属性 </button>
-            <button class="fixed" data-clipboard-text="[field:global.autoindex  runphp='yes']if(0 == @me % 2) @me='HTML';else @me = '';[/field:global.autoindex]" type="button"> 递增求余属性 </button>
+            <button class="fixed" data-clipboard-text="[field:global.autoindex  runphp='yes']--@me;if((0 == @me % 4) && 0 != @me) @me='HTML';else @me = '';[/field:global.autoindex]" type="button"> 递增求余属性 </button>
 
         </div>
         <div class="controllerRow">
@@ -83,7 +83,6 @@
             <button class="btn" data-clipboard-target="#sourcebox" value="index_arclist" type="button"> arclist大图 </button>
             <button class="btn" data-clipboard-target="#sourcebox" value="index_channel" type="button"> channel-Top </button>
             <button class="btn" data-clipboard-target="#sourcebox" value="index_channel_typeid" type="button"> channel-Typeid </button>
-            <button class="fixed" data-clipboard-text="{dede:field.typename /}" type="button"> 当前栏目名称 </button>
             <button class="fixed" data-clipboard-text="{dede:field name='position'/}" type="button"> 当前位置 </button>
             <button class="fixed" data-clipboard-text="{dede:type}[field:id function='GetTopType(@me)' /]{/dede:type}" type="button"> Top栏目名称 </button>
             <button class="fixed_html" value="toptypeen" type="button"> Top栏目英文名 </button>
@@ -93,6 +92,7 @@
 
             <button class="fixed_html" value="nav_onehead" type="button"> 同一HEAD当前页 </button>
             <button class="fixed_html" value="nav_arcid" type="button"> 文章ID为导航 </button>
+            <button class="fixed_html" value="nav_topid" type="button"> TopID为导航JS </button>
         </div>
         <div class="controllerRow">
             <label>列表页标签：</label>
@@ -101,12 +101,14 @@
             <button class="fixed_html" value="wap_list_page" type="button"> 手机页码HTML </button>
             <button class="fixed_html" value="page_css" type="button"> 页码CSS </button>
             <button class="fixed" data-clipboard-text="{dede:type}[field:typelink /]{/dede:type}" type="button"> 返回列表 </button>
+            <button class="fixed" data-clipboard-text="{dede:type typeid='1'}[field:typelink /]{/dede:type}" type="button"> Type-ID </button>
             <button class="fixed_html" value="search_keyword" type="button"> 搜索关键字 </button>
 
             <button class="fixed" data-clipboard-text="{dede:global.cfg_webname/}" type="button"> 站点名称 </button>
             <button class="fixed" data-clipboard-text="{dede:global.cfg_keywords/}" type="button"> 站点关键字 </button>
             <button class="fixed" data-clipboard-text="{dede:global.cfg_description/}" type="button"> 站点描述 </button>
 
+            <button class="fixed" data-clipboard-text="{dede:field.typename /}" type="button"> 当前栏目名称 </button>
         </div>
         <div class="controllerRow">
             <label>详情页标签：</label>
@@ -150,9 +152,8 @@
 
         <div class="controllerRow">
             <label>文件批量操作：</label>
-
-            <button value="cmd_format_html" type="button"> 格式化HTML </button>
             <button value="cmd_remove_bom" type="button"> 去除BOM </button>
+            <button value="cmd_format_html" type="button"> 格式化HTML </button>
 
             <button value="cmd_replace_dedecms" type="button"> 替换头部dede </button>
             <button value="cmd_replace_dedecms_seo" type="button"> 替换头部SEO </button>
@@ -189,7 +190,7 @@
 <!--隐藏资料元素-->
 <div class="hidden_div">
     <textarea id="fixed_html_jump_wap"><script type="text/javascript">function getPhoneURL(){var goPhoneURL="";if(""=="{dede:field.id /}"){goPhoneURL="/m/index.php";return goPhoneURL}goPhoneURL="{dede:field.typename /}"=="{dede:field.title runphp='yes'} @me = trim(strrchr('@me', $GLOBALS['cfg_list_symbol']) ? strrchr('@me', $GLOBALS['cfg_list_symbol']) : '@me'); {/dede:field.title}"?"/m/list.php?tid={dede:field.id /}":"/m/view.php?aid={dede:field.id /}";return goPhoneURL}if(window.location.toString().indexOf("pref=padindex")!=-1){}else{if(/AppleWebKit.*Mobile/i.test(navigator.userAgent)||(/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){if(window.location.href.indexOf("?mobile")<0){try{if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){window.location.href=getPhoneURL()}else{if(/iPad/i.test(navigator.userAgent)){}else{}}}catch(e){}}}}</script></textarea>
-    <textarea id="fixed_html_index_sql">{dede:sql sql="SELECT content FROM `#@__arctype` WHERE id=1 "}[field:content  function='cn_substr(Html2Text(@me), 300)' /]{/dede:sql}</textarea>
+    <textarea id="fixed_html_index_sql">{dede:sql sql="SELECT content FROM `#@__arctype` WHERE id=1 "}[field:content  function='cn_substr(Html2Text(@me), 1000)' /]{/dede:sql}</textarea>
     <textarea id="fixed_html_toptypeen">{dede:type}[field:id function="GetTopType(@me, 'enname')" /]{/dede:type}</textarea>
     <textarea id="fixed_html_list_page"><div id="Paging"><div class="Pagination">{dede:pagelist listitem="info,index,end,pre,next,pageno" listsize="3"/}</div></div></textarea>
     <textarea id="fixed_html_wap_list_page"><div id="Paging"><div class="Pagination">{dede:pagelist listitem="index,end,pre,next,pageno" listsize="1"/}</div></div></textarea>
@@ -200,49 +201,73 @@
     <textarea id="fixed_html_arc_next">{dede:prenext get='pre' function="str_replace('上一篇','下一篇',@me)"/}</textarea>
     <textarea id="fixed_html_nav_onehead">{dede:field name='typeid' runphp='yes'}(@me == '') ? @me = 'active' : @me = '';{/dede:field}</textarea>
     <textarea id="fixed_html_nav_arcid">{dede:field name='aid' runphp='yes'}@me = @me=='4'?" class='on'":'';{/dede:field}</textarea>
+    <textarea id="fixed_html_nav_topid">
+        <script type="text/javascript">
+            +(function () {var current_class='active', current_nav = document.getElementById("nav_{dede:type}[field:id function='GetTopid(@me)'/]{/dede:type}");current_nav && current_nav.setAttribute("class", current_nav.getAttribute('class') ? (current_nav.getAttribute('class') + " " + current_class) : " " + current_class);})();
+        </script>
+    </textarea>
     <textarea id="fixed_html_search_keyword">搜索<strong style="color:red;">{dede:global name='keyword' function='RemoveXSS(@me)'/}</strong>结果页：</textarea>
     <textarea id="fixed_html_page_css">
-       /*页码样式-基础版-紧凑型（无空隙）*/
-        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:100%;text-align:center;}
+        /*页码样式-基础版-紧凑型（无空隙）*/
+        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;text-align:center;width:100%;overflow:hidden;}
         .Pagination {display:inline-block;}
-        .Pagination .pageinfo {border:1px solid #dedede;color:#333;margin-left:1rem;}
-        .Pagination .pagejump {border:1px solid #dedede;color:#333;margin-left:1rem;}
-        .Pagination .pagejump input {width: 2rem;margin: -2px 2px;padding: 0;}
-        .Pagination .pageselect {min-width: 3rem;padding: 0.358rem;border: 1px solid #ccc;}
-        .Pagination span {background:#f6f6f6 none repeat scroll 0 0;display:block;float:left;text-align:center;padding:0.3rem 0.8rem;}
-        .Pagination a {background:#f6f6f6 none repeat scroll 0 0;border:1px solid #dfdfdf;color:#555;display:block;float:left;text-align:center;text-decoration:none;padding:0.3rem 0.8rem;}
-        .Pagination a:hover {color:#fff;background:#2fd0b5 none repeat scroll 0 0;}
-        .Pagination span.current {border:1px solid #2fd0b5;background:#2fd0b5 none repeat scroll 0 0;color:White;position:relative;}
+        .Pagination span {display:block;float:left;background:#f6f6f6;text-align:center;padding:5px 10px;}
+        .Pagination a {display:block;float:left;background:#f6f6f6;border:1px solid #dfdfdf;color:#555;text-align:center;text-decoration:none;padding:5px 10px;}
+        .Pagination a:hover {color:#fff;background:#2fd0b5;}
+        .Pagination span.current {border:1px solid #2fd0b5;background:#2fd0b5;color:white;position:relative;}
         .Pagination span.disabled {border:1px solid #dfdfdf;color:#aaa;cursor:not-allowed;}
-        @media screen and (max-width:767px) {.Pagination .pageinfo {display:none;}}
+        .Pagination .pageinfo {border:1px solid #dedede;color:#333;margin-left:10px;}
+        .Pagination .pageselect {min-width:60px;padding:5px;border:1px solid #ccc;margin-left:10px;}
+        .Pagination .pagejump {display:inline-block;border:1px solid #dedede;color:#333;margin-left:10px;padding:2px 4px;}
+        .Pagination .pagejump .pagejumpinput {width:40px;border:1px solid #2fd0b5;}
+        .Pagination .pagejump .pagejumpsubmit {border:1px solid #2fd0b5;background:#2fd0b5;color:white;padding:3px 5px;cursor:pointer;}
+        @media screen and (max-width:767px) {#Paging {font-size:12px;}
+            .Pagination a,.Pagination span {padding:4px 8px;}
+            .Pagination .pageinfo {display:none;}
+            .Pagination .pageselect {display:none;}
+            .Pagination .pagejump {display:none;}
+        }
 
-        /*页码样式-基础版-稀疏型（有空隙）*/
-        #Paging {text-align:center;color:#666; overflow:hidden;}
-        .Pagination {display:inline-block;line-height:30px;text-align:center;letter-spacing:0;font-size:12px;overflow:hidden;}
-        .Pagination .pageinfo {border:1px solid #FF0000;color:#666;margin-left:1rem;background: none;}
-        .Pagination .pagejump {border:1px solid #FF0000;color:#333;margin-left:1rem;}
-        .Pagination .pagejump input {width: 2rem;margin: -2px 2px;padding: 0;}
-        .Pagination .pageselect {min-width: 3rem;padding: 0.358rem;border: 1px solid #ccc;}
-        .Pagination span {color:#666;border:1px solid #FF0000;background:#f8f8f8;text-align:center;padding:5px 13px;margin:0 1px;}
-        .Pagination a {color:#666;border:1px solid #FF0000;background:#f8f8f8;text-align:center;padding:5px 13px;margin:0 1px;text-decoration:none;}
-        .Pagination a:hover {color:#fff;border:1px solid #FF0000;background:#F0474A;}
-        .Pagination span.current {color:#fff;border:1px solid #FF0000;background:#F0474A;}
-        .Pagination span.disabled {border:1px solid #dfdfdf;color:#aaa;cursor:not-allowed;}
-        @media screen and (max-width:767px) {.Pagination .pageinfo {display:none;}}
-
-        /*页码样式-特效版-反转型（默认有背景色hover为中空）*/
-        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:100%;text-align:center;}
+         /*页码样式-基础版-稀疏型（有空隙）*/
+        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;text-align:center;width:100%;overflow:hidden;}
         .Pagination {display:inline-block;}
-        .Pagination .pageinfo {border:1px solid #dedede;color:#666;margin-left:1rem;background: none;}
-        .Pagination .pagejump {border:1px solid #dedede;color:#333;margin-left:1rem;}
-        .Pagination .pagejump input {width: 2rem;margin: -2px 2px;padding: 0;}
-        .Pagination .pageselect {min-width: 3rem;padding: 0.358rem;border: 1px solid #ccc;}
-        .Pagination span {padding:5px 20px;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;}
-        .Pagination a {padding:5px 20px;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;text-decoration:none;}
+        .Pagination span {display:block;float:left;color:#666;border:1px solid #ff0000;background:#f8f8f8;text-align:center;padding:5px 10px;margin:0 5px;}
+        .Pagination a {display:block;float:left;color:#666;border:1px solid #ff0000;background:#f8f8f8;text-align:center;text-decoration:none;padding:5px 10px;margin:0 5px;}
+        .Pagination a:hover {color:#fff;border:1px solid #ff0000;background:#ff0000;}
+        .Pagination span.current {color:#fff;border:1px solid #ff0000;background:#ff0000;}
+        .Pagination span.disabled {border:1px solid #dfdfdf;color:#aaa;cursor:not-allowed;}
+        .Pagination .pageinfo {border:1px solid #ff0000;color:#666;margin-left:10px;background:none;}
+        .Pagination .pageselect {min-width:60px;padding:5px;border:1px solid #ccc;margin-left:10px;}
+        .Pagination .pagejump {display:inline-block;border:1px solid #dedede;color:#333;margin-left:10px;padding:2px 4px;}
+        .Pagination .pagejump .pagejumpinput {width:40px;border:1px solid #ff0000;}
+        .Pagination .pagejump .pagejumpsubmit {border:1px solid #ff0000;background:#ff0000;color:white;padding:3px 5px;cursor:pointer;}
+        @media screen and (max-width:767px) {#Paging {font-size:12px;}
+            .Pagination a,.Pagination span {padding:4px 8px;margin:0 1px;}
+            .Pagination .pageinfo {display:none;}
+            .Pagination .pageselect {display:none;}
+            .Pagination .pagejump {display:none;}
+        }
+
+         /*页码样式-特效版-反转型（默认有背景色hover为中空）*/
+        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;text-align:center;width:100%;overflow:hidden;}
+        .Pagination {display:inline-block;}
+        .Pagination span {display:block;float:left;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;padding:5px 20px;margin:0 5px;}
+        .Pagination a {display:block;float:left;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;text-decoration:none;padding:5px 20px;margin:0 5px;}
         .Pagination a:hover {color:#3b9ef3;border:1px solid #3b9ef3;background-color:#fff;}
-        .Pagination span.current {color:#3b9ef3;border:1px solid #3b9ef3;background-color:#fff;}
-        .Pagination span.disabled {border:1px solid #dfdfdf;color:#fff;cursor:not-allowed;background: #aaa;}
-        @media screen and (max-width:767px) {.Pagination .pageinfo {display:none;}}
+        .Pagination span.current {color:#3b9ef3;border:1px solid #3b9ef3;background-color:#fff;padding:4px 18px;}
+        .Pagination span.disabled {border:1px solid #dfdfdf;color:#fff;cursor:not-allowed;background:#aaa;}
+        .Pagination .pageinfo {border:1px solid #dedede;color:#666;margin-left:10px;background:none;}
+        .Pagination .pageselect {min-width:60px;padding:5px;border:1px solid #ccc;margin-left:10px;}
+        .Pagination .pagejump {display:inline-block;border:1px solid #dedede;color:#333;margin-left:10px;padding:2px 4px;}
+        .Pagination .pagejump .pagejumpinput {width:40px;border:1px solid #3b9ef3;}
+        .Pagination .pagejump .pagejumpsubmit {border:1px solid #3b9ef3;background:#3b9ef3;color:white;padding:3px 5px;cursor:pointer;}
+        @media screen and (max-width:767px) {#Paging {font-size:12px;}
+            .Pagination a,.Pagination span {padding:4px 8px;margin:0 1px;}
+            .Pagination span.current {padding:3px 7px;margin:0 1px;}
+            .Pagination .pageinfo {display:none;}
+            .Pagination .pageselect {display:none;}
+            .Pagination .pagejump {display:none;}
+        }
     </textarea>
 </div>
 </body>

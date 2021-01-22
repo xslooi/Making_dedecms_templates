@@ -320,14 +320,22 @@ function execute_cmd($cmd){
             }
             break;
         case 'cmd_remove_bom':
-            $rs = remove_bom();
+            $rs = remove_bom(INPUT_DIR);
             if($rs){
-                $msg = '去除文件BOM头完成';
+                $msg = 'input去除文件BOM头完成';
+            }else{
+                $msg = 'input文件夹为空';
+            }
+
+            $rs = remove_bom(OUTPUT_DIR);
+            if($rs){
+                $msg = ' output去除文件BOM头完成 ';
                 $result = true;
             }else{
-                $msg = '文件夹为空';
+                $msg .= ' output文件夹为空 ';
                 $result = false;
             }
+
             break;
         case 'cmd_replace_dedecms_equals':
             $rs = replace_dedecms_equals();
@@ -1030,7 +1038,7 @@ function dede_replace(){
                         $html_body = str_replace('<title>{dede:field.typename /}-{dede:global.cfg_webname/}</title>', '<title>{dede:global.cfg_webname/}</title>', $html_body);
                     }
                     elseif(preg_match('/详情/', $file_name)){
-                        $html_body = str_replace('<title>{dede:field.typename /}-{dede:global.cfg_webname/}</title>', '<title>{dede:field.title /}_{dede:global.cfg_webname/}</title>', $html_body);
+                        $html_body = str_replace('<title>{dede:field.typename /}-{dede:global.cfg_webname/}</title>', '<title>{dede:field.title /}-{dede:global.cfg_webname/}</title>', $html_body);
                     }
                     //endregion
 
@@ -1554,10 +1562,10 @@ function replace_name(){
  * 去除文件BOM头信息
  * @return bool
  */
-function remove_bom(){
+function remove_bom($dir){
     $result = true;
 
-    $html_files = get_file_list(OUTPUT_DIR . '*.*');  // todo 此函数返回的结果直接是windows gb2312
+    $html_files = get_file_list($dir . '*.*');  // todo 此函数返回的结果直接是windows gb2312
 
     if(isset($html_files[0])){
         foreach($html_files as $key=>$value){

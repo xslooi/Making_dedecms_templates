@@ -208,28 +208,29 @@
     </textarea>
     <textarea id="fixed_html_search_keyword">搜索<strong style="color:red;">{dede:global name='keyword' function='RemoveXSS(@me)'/}</strong>结果页：</textarea>
     <textarea id="fixed_html_page_css">
-        /*页码样式-基础版-紧凑型（无空隙）*/
-        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;text-align:center;width:100%;overflow:hidden;}
+       /*页码样式-基础版-紧凑型（无空隙）*/
+        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;line-height: 16px;text-align:center;width:100%;overflow:hidden;}
         .Pagination {display:inline-block;}
-        .Pagination span {display:block;float:left;background:#f6f6f6;text-align:center;padding:5px 10px;}
-        .Pagination a {display:block;float:left;background:#f6f6f6;border:1px solid #dfdfdf;color:#555;text-align:center;text-decoration:none;padding:5px 10px;}
+        .Pagination a, .Pagination span {display:block;float:left;background:#f6f6f6;text-align:center;padding:5px 10px;}
+        .Pagination a {border:1px solid #dfdfdf;color:#555;text-decoration:none;}
         .Pagination a:hover {color:#fff;background:#2fd0b5;}
-        .Pagination span.current {border:1px solid #2fd0b5;background:#2fd0b5;color:white;position:relative;}
+        .Pagination span.current {border:1px solid #2fd0b5;background:#2fd0b5;color:white;}
         .Pagination span.disabled {border:1px solid #dfdfdf;color:#aaa;cursor:not-allowed;}
         .Pagination .pageinfo {border:1px solid #dedede;color:#333;margin-left:10px;}
         .Pagination .pageselect {min-width:60px;padding:5px;border:1px solid #ccc;margin-left:10px;}
         .Pagination .pagejump {display:inline-block;border:1px solid #dedede;color:#333;margin-left:10px;padding:2px 4px;}
         .Pagination .pagejump .pagejumpinput {width:40px;border:1px solid #2fd0b5;}
         .Pagination .pagejump .pagejumpsubmit {border:1px solid #2fd0b5;background:#2fd0b5;color:white;padding:3px 5px;cursor:pointer;}
-        @media screen and (max-width:767px) {#Paging {font-size:12px;}
-            .Pagination a,.Pagination span {padding:4px 8px;}
+        @media screen and (max-width:767px) {
+            #Paging {font-size:12px;line-height: 14px;}
+            .Pagination a,.Pagination span {padding:4px 8px; margin: 0 1px;}
             .Pagination .pageinfo {display:none;}
             .Pagination .pageselect {display:none;}
             .Pagination .pagejump {display:none;}
         }
 
          /*页码样式-基础版-稀疏型（有空隙）*/
-        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;text-align:center;width:100%;overflow:hidden;}
+        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;line-height: 16px;text-align:center;width:100%;overflow:hidden;}
         .Pagination {display:inline-block;}
         .Pagination span {display:block;float:left;color:#666;border:1px solid #ff0000;background:#f8f8f8;text-align:center;padding:5px 10px;margin:0 5px;}
         .Pagination a {display:block;float:left;color:#666;border:1px solid #ff0000;background:#f8f8f8;text-align:center;text-decoration:none;padding:5px 10px;margin:0 5px;}
@@ -241,27 +242,29 @@
         .Pagination .pagejump {display:inline-block;border:1px solid #dedede;color:#333;margin-left:10px;padding:2px 4px;}
         .Pagination .pagejump .pagejumpinput {width:40px;border:1px solid #ff0000;}
         .Pagination .pagejump .pagejumpsubmit {border:1px solid #ff0000;background:#ff0000;color:white;padding:3px 5px;cursor:pointer;}
-        @media screen and (max-width:767px) {#Paging {font-size:12px;}
+        @media screen and (max-width:767px) {
+            #Paging {font-size:12px;line-height: 14px;}
             .Pagination a,.Pagination span {padding:4px 8px;margin:0 1px;}
             .Pagination .pageinfo {display:none;}
             .Pagination .pageselect {display:none;}
             .Pagination .pagejump {display:none;}
         }
 
-         /*页码样式-特效版-反转型（默认有背景色hover为中空）*/
-        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;text-align:center;width:100%;overflow:hidden;}
+        /*页码样式-特效版-反转型（默认有背景色hover为中空）*/
+        #Paging {font-family:'Microsoft YaHei','Arial',sans-serif;font-size:14px;line-height: 16px;text-align:center;width:100%;overflow:hidden;}
         .Pagination {display:inline-block;}
-        .Pagination span {display:block;float:left;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;padding:5px 20px;margin:0 5px;}
-        .Pagination a {display:block;float:left;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;text-decoration:none;padding:5px 20px;margin:0 5px;}
+        .Pagination span {display:block;float:left;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;padding:5px 15px;margin:0 5px;}
+        .Pagination a {display:block;float:left;background-color:#3b9ef3;border-radius:3px;color:#fff;-webkit-transition:all .3s;-moz-transition:all .3s;-ms-transition:all .3s;transition:all .3s;text-decoration:none;padding:5px 15px;margin:0 5px;}
         .Pagination a:hover {color:#3b9ef3;border:1px solid #3b9ef3;background-color:#fff;}
-        .Pagination span.current {color:#3b9ef3;border:1px solid #3b9ef3;background-color:#fff;padding:4px 18px;}
+        .Pagination span.current {color:#3b9ef3;border:1px solid #3b9ef3;background-color:#fff;padding:4px 13px;}
         .Pagination span.disabled {border:1px solid #dfdfdf;color:#fff;cursor:not-allowed;background:#aaa;}
         .Pagination .pageinfo {border:1px solid #dedede;color:#666;margin-left:10px;background:none;}
         .Pagination .pageselect {min-width:60px;padding:5px;border:1px solid #ccc;margin-left:10px;}
         .Pagination .pagejump {display:inline-block;border:1px solid #dedede;color:#333;margin-left:10px;padding:2px 4px;}
         .Pagination .pagejump .pagejumpinput {width:40px;border:1px solid #3b9ef3;}
         .Pagination .pagejump .pagejumpsubmit {border:1px solid #3b9ef3;background:#3b9ef3;color:white;padding:3px 5px;cursor:pointer;}
-        @media screen and (max-width:767px) {#Paging {font-size:12px;}
+        @media screen and (max-width:767px) {
+            #Paging {font-size:12px;line-height: 14px;}
             .Pagination a,.Pagination span {padding:4px 8px;margin:0 1px;}
             .Pagination span.current {padding:3px 7px;margin:0 1px;}
             .Pagination .pageinfo {display:none;}
